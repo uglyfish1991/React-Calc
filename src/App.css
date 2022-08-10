@@ -10,7 +10,7 @@
 }
 
 button {
-  padding: 20px;
+  width: 33%;
   font-size: 2rem;
 }
 
@@ -19,7 +19,9 @@ button:hover{
 }
 
 .buttonArea{
-  width: 60vw;
+  width: 40vw;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .screen{

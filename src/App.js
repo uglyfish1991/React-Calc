@@ -1,36 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
-
-
-// const App = () => {
-//   const [persons, setPersons] = useState([
-//       { name: "Leon" },
-//       { name: "Jordan" },
-//   ]);
-//   const handleClick = (value) => {
-//       console.log(value);
-//   };
-//   return (
-//       <div>
-//           <Person name={persons[0].name} clickMe={handleClick} />
-//           <Person name={persons[1].name} clickMe={handleClick} />
-//       </div>
-//   );
-// };
-// const Person = (props) => {
-//   return <h1 onClick={() => props.clickMe({props.name})}>{props.name}</h1>;
-// }
+import { evaluate } from 'mathjs';
 
 const App = () => {
   const buttons =
     [
-      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-'
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+',"-","/","*",
     ]
 
-  let [num, getNum] = useState([])
+  const [num, getNum] = useState([])
 
-  
+  const buttonHandler = (calcButton) => {
+    let numArray = [...num]
+    numArray.push(calcButton)
+    getNum(numArray)
+
+  }
+
+  const equal = (num) => {
+    console.log('doing equal')
+    let numJoin = [...num]
+    console.log(numJoin)
+    numJoin=numJoin.join("")
+    console.log(numJoin)
+    let total = evaluate(numJoin)
+    getNum(total)
+
+
+  }
 
   return (
     <div className="App">
@@ -40,9 +37,13 @@ const App = () => {
         <div className="buttonArea">
           {buttons.map((calcButton, index) => {
             return (
-              <button key={index} onClick={() => getNum(oldArray =>[...oldArray,calcButton])}>{calcButton}</button>
+              <button key={index} onClick={() => buttonHandler(calcButton)}>{calcButton}</button>
             )
-          })}</div></div>
+          })}
+        </div>
+        <button onClick={()=>equal(num)}>=</button>
+        {/* <p><button onClick={()=> evaluate(num)}>=</button></p> */}
+      </div>
     </div>
   )
 }
